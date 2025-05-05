@@ -16,26 +16,58 @@ def show_home():
     # Main content in two columns
     col1, col2 = st.columns([2, 1])
 
+    # with col1:
+    #     st.markdown(
+    #         """
+    #     <div style="animation: fadeIn 0.8s ease-out 0.2s forwards;">
+    #         <h2 style="margin-top: 0.5rem;">Welcome to my portfolio!</h2>
+    #         <p>I'm a Machine Learning Engineer with expertise in deep learning, computer vision,
+    #         and natural language processing. Currently pursuing my MSc in Data Science at
+    #         FAU Erlangen-Nuremberg, Germany.</p>
+
+    #         <p>My work focuses on developing innovative ML solutions, from gene regulatory networks
+    #         to language translation systems.</p>
+
+    #         <h3>Featured Project: Emotion Detection</h3>
+    #         <p>Try out the live emotion detection demo in the ML Demo section!</p>
+    #     </div>
+    #     """,
+    #         unsafe_allow_html=True,
+    # #     )
+
+    #     # Call-to-action buttons using native Streamlit buttons
+    #     btn_col1, btn_col2 = st.columns(2)
+    #     with btn_col1:
+    #         if st.button(
+    #             "View Projects", key="btn_view_projects", use_container_width=True
+    #         ):
+    #             st.session_state.page = "Projects"
+    #             st.rerun()
+
+    #     with btn_col2:
+    #         if st.button(
+    #             "Try ML Demo", key="btn_try_ml_demo", use_container_width=True
+    #         ):
+    #             st.session_state.page = "ML Demo"
+    #             st.rerun()
     with col1:
-        st.markdown(
+        st.subheader("Welcome to my portfolio!")
+
+        st.write(
             """
-        <div style="animation: fadeIn 0.8s ease-out 0.2s forwards;">
-            <h2 style="margin-top: 0.5rem;">Welcome to my portfolio!</h2>
-            <p>I'm a Machine Learning Engineer with expertise in deep learning, computer vision, 
-            and natural language processing. Currently pursuing my MSc in Data Science at 
-            FAU Erlangen-Nuremberg, Germany.</p>
-            
-            <p>My work focuses on developing innovative ML solutions, from gene regulatory networks 
-            to language translation systems.</p>
-            
-            <h3>Featured Project: Emotion Detection</h3>
-            <p>Try out the live emotion detection demo in the ML Demo section!</p>
-        </div>
-        """,
-            unsafe_allow_html=True,
+            I'm a **Machine Learning Engineer** with expertise in deep learning, computer vision, 
+            and natural language processing. I'm currently pursuing my MSc in Data Science at 
+            **FAU Erlangen-Nuremberg, Germany**.
+
+            My work focuses on developing innovative ML solutions — from **gene regulatory networks** 
+            to **language translation systems**.
+            """
         )
 
-        # Call-to-action buttons using native Streamlit buttons
+        st.markdown("### 🎯 Featured Project: Emotion Detection")
+        st.write("Try out the live emotion detection demo in the **ML Demo** section!")
+
+        # Call-to-action buttons
         btn_col1, btn_col2 = st.columns(2)
         with btn_col1:
             if st.button(
@@ -52,30 +84,13 @@ def show_home():
                 st.rerun()
 
     with col2:
-        # At a Glance metrics using custom styled container
-        st.markdown(
-            """
-        <div class="metric-container">
-            <h3 style="margin-top: 0; margin-bottom: 1rem;">At a Glance</h3>
-            
-            <div style="margin-bottom: 1.2rem;">
-                <div class="metric-value">8+</div>
-                <div class="metric-label">ML Projects</div>
-            </div>
-            
-            <div style="margin-bottom: 1.2rem;">
-                <div class="metric-value">4+</div>
-                <div class="metric-label">Years Experience</div>
-            </div>
-            
-            <div style="margin-bottom: 0.5rem;">
-                <div class="metric-value">PyTorch, TensorFlow</div>
-                <div class="metric-label">Frameworks</div>
-            </div>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
+        # Use native Streamlit metrics instead of custom HTML
+        st.markdown("<h3>At a Glance</h3>", unsafe_allow_html=True)
+
+        # Native Streamlit metrics
+        st.metric(label="ML Projects", value="8+")
+        st.metric(label="Years Experience", value="4+")
+        st.metric(label="Frameworks", value="PyTorch, TensorFlow")
 
     # Recent projects section
     st.markdown("<hr style='margin: 2rem 0; opacity: 0.2;'>", unsafe_allow_html=True)
@@ -90,9 +105,6 @@ def show_home():
         <div class="project-card">
             <h3>🧬 Gene-regulatory Networks</h3>
             <p>Novel approach using Kolmogorov-Arnold Networks</p>
-            <button onclick="setProjectPage()" style="background: linear-gradient(45deg, #6c63ff, #4cc9f0); 
-                   color: white; border: none; padding: 8px 15px; border-radius: 6px; 
-                   cursor: pointer; margin-top: 0.8rem;">Learn More</button>
         </div>
         """,
             unsafe_allow_html=True,

@@ -1,14 +1,33 @@
 import streamlit as st
 
+# from components.animated_profile import add_animoji_profile
+
 
 def show_sidebar():
-    """Display the sidebar with profile information and languages (no navigation)."""
-    # Profile image with rounded styling
-    st.sidebar.image("assets/images/profile.jpg", width=150, use_column_width=False)
+    """Display the sidebar with animated profile and information."""
+
+    st.sidebar.markdown(
+        """
+        <div style="margin-bottom: 20px;">
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Add animated profile - IMPORTANT: This must be placed in the sidebar!
+    with st.sidebar:
+        st.image("assets/images/profile.jpg", width=150)
+
+    # Add some space
+    st.sidebar.markdown(
+        "<div style='margin-top: 170px;'></div>", unsafe_allow_html=True
+    )
+
+    # Title and subtitle
     st.sidebar.title("Posh Raj Dahal")
     st.sidebar.write("Data Scientist | ML Engineer")
 
-    # Social icons using Unicode emoji (more reliable than image files)
+    # Social icons using Unicode emoji
     st.sidebar.markdown(
         """
     <div style="display: flex; justify-content: space-around; margin-top: 10px; margin-bottom: 20px;">
@@ -26,7 +45,7 @@ def show_sidebar():
         unsafe_allow_html=True,
     )
 
-    # Languages section (keeping this part)
+    # Languages section
     st.sidebar.markdown("## Languages")
     st.sidebar.markdown("- German (B1)")
     st.sidebar.markdown("- English (Fluent)")
@@ -53,5 +72,4 @@ def show_sidebar():
         unsafe_allow_html=True,
     )
 
-    # No need to return a selected page since navigation is handled through the top bar
     return None

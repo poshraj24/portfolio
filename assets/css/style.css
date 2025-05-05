@@ -431,3 +431,39 @@ code {
     transform: translateY(-3px);
     text-shadow: 0 0 10px rgba(76, 201, 240, 0.8);
 }
+
+/* Hide any code blocks that might be showing */
+.stCodeBlock {
+    display: none !important;
+}
+
+/* Style the native metrics */
+[data-testid="stMetricValue"] {
+    font-size: 1.8rem !important;
+    font-weight: 600 !important;
+    color: #6c63ff !important;
+}
+
+[data-testid="stMetricLabel"] {
+    font-size: 0.9rem !important;
+    color: #f8f9fa !important;
+}
+
+[data-testid="stMetricDelta"] {
+    display: none !important;
+}
+
+div.element-container div.stMetric {
+    background-color: rgba(30, 41, 59, 0.6) !important;
+    border-radius: 12px !important;
+    padding: 1rem !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+    margin-bottom: 1rem !important;
+    backdrop-filter: blur(8px) !important;
+    transition: all 0.3s ease !important;
+}
+
+div.element-container div.stMetric:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25) !important;
+}
