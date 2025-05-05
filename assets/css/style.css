@@ -1,64 +1,433 @@
-/* Main styling */
-body {
-    font-family: 'Roboto', sans-serif;
-    color: #333;
+/* Main styling with dark theme */
+:root {
+    --primary-color: #6c63ff;
+    --secondary-color: #4361ee;
+    --dark-bg: #0f172a;
+    --darker-bg: #0a0e1b;
+    --text-color: #f8f9fa;
+    --accent-color: #4cc9f0;
+    --card-bg: rgba(30, 41, 59, 0.6);
+    --card-hover: rgba(38, 50, 71, 0.8);
+    --transition: all 0.3s ease;
 }
 
-/* Custom header styling */
-.header-container {
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    background-color: var(--dark-bg);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Galaxy background */
+.galaxy-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--darker-bg);
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+        radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+    animation: galaxy-animation 100s linear infinite;
+}
+
+@keyframes galaxy-animation {
+    0% { background-position: 0 0, 40px 60px, 130px 270px, 70px 100px; }
+    100% { background-position: 1000px 1000px, 1040px 1060px, 1130px 1270px, 1070px 1100px; }
+}
+
+/* Star effect for interactive background */
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.4;
+    pointer-events: none;
+    transition: var(--transition);
+    animation: twinkle 5s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.7; }
+}
+
+/* Top navigation */
+.top-nav {
+    display: flex;
+    width: 100%;
     padding: 1rem;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #eaeaea;
+    background-color: rgba(10, 14, 27, 0.7);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.top-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-right: 2rem;
+    transition: var(--transition);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    position: relative;
+}
+
+.top-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s;
+}
+
+.top-nav a:hover::after {
+    width: 100%;
+}
+
+.top-nav a:hover {
+    color: var(--accent-color);
+}
+
+.top-nav a.active {
+    color: var(--accent-color);
+}
+
+.top-nav a.active::after {
+    width: 100%;
+}
+
+/* Sidebar styling */
+.sidebar {
+    background-color: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.5);
+    transition: var(--transition);
+    object-fit: cover;
+}
+
+.profile-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(108, 99, 255, 0.8);
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+.social-icon:hover {
+    color: var(--accent-color);
+    transform: translateY(-5px);
+}
+
+/* Main content styling */
+.main-content {
+    padding: 2rem;
+}
+
+h1, h2, h3 {
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+/* Glance metrics */
+.metrics-container {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    transition: var(--transition);
+}
+
+.metrics-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.metric {
+    margin-bottom: 1.5rem;
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.metric-label {
+    font-size: 1rem;
+    color: var(--text-color);
+    opacity: 0.8;
 }
 
 /* Project cards */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
 .project-card {
-    border-radius: 8px;
-    border: 1px solid #eaeaea;
-    padding: 1rem;
-    transition: transform 0.3s ease;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+    transition: var(--transition);
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transform: translateY(-10px);
+    background-color: var(--card-hover);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* Button styling */
-.custom-button {
-    background-color: #4CAF50;
+.project-card:hover::before {
+    width: 6px;
+}
+
+.project-card h3 {
+    margin-top: 0;
+    color: var(--accent-color);
+}
+
+/* Buttons styling */
+.btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
     cursor: pointer;
-}
-
-/* Emotion-specific themes */
-.theme-happy {
-    background-color: #FFFACD;
-}
-
-.theme-sad {
-    background-color: #E6E6FA;
-}
-
-.theme-angry {
-    background-color: #FFE4E1;
-}
-
-/* Skills visualization */
-.skill-bar {
-    height: 10px;
-    background-color: #4CAF50;
-    border-radius: 5px;
-}
-
-/* Footer styling */
-.footer-container {
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid #eaeaea;
+    transition: var(--transition);
+    display: inline-block;
     text-align: center;
-    font-size: 0.8rem;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(108, 99, 255, 0.5);
+    filter: brightness(1.1);
+}
+
+.btn-secondary {
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+}
+
+/* Languages list */
+.languages-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.languages-list li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+}
+
+.languages-list li::before {
+    content: '•';
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Navigation container */
+.nav-container {
+    margin-top: 2rem;
+}
+
+.nav-container a {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+}
+
+.nav-container a:hover, 
+.nav-container a.active {
+    background-color: rgba(108, 99, 255, 0.2);
+    color: var(--accent-color);
+    transform: translateX(5px);
+}
+
+.nav-container a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animated {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
+
+.delay-3 {
+    animation-delay: 0.6s;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar {
+        padding: 1rem 0.5rem;
+    }
+    
+    .profile-img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+/* Hide radio buttons completely in sidebar */
+.st-bc {
+    display: none !important;
+}
+
+.st-bq {
+    display: none !important;
+}
+
+div.row-widget.stRadio > div {
+    display: none !important;
+}
+
+/* Fix raw HTML display issues */
+code {
+    display: none !important;
+}
+
+/* Better styling for the project cards */
+.project-card h3 {
+    margin-top: 0;
+    color: var(--accent-color);
+}
+
+.project-card p {
+    margin-bottom: 1rem;
+}
+
+/* Better metric styling */
+.metric-container {
+    background-color: rgba(30, 41, 59, 0.6);
+    border-radius: 12px;
+    padding: 1.2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+}
+
+.metric-value {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Make emojis in sidebar look better */
+.stSidebar a {
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.stSidebar a:hover {
+    transform: translateY(-3px);
+    text-shadow: 0 0 10px rgba(76, 201, 240, 0.8);
 }
